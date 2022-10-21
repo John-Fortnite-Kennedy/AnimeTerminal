@@ -8,6 +8,7 @@ import (
 	_ "image/png"
 	"os"
 	"runtime"
+	"time"
 
 	"github.com/qeesung/image2ascii/convert"
 
@@ -77,11 +78,49 @@ func main() {
 		}
 	}
 
+	// f, err := os.Create("notepad.txt")
+
+	// if err != nil {
+	// 	panic(err)
+	// }
+
+	// defer f.Close()
+
+	// exepath := "C://Windows//system32//notepad.exe"
+	// file := "C:/Users/123/go/src/AnimeTerminal/AnimeTerminal/notepad.txt"
+	// cmd := exec.Command(exepath, file)
+	// errr := cmd.Run()
+	// if errr != nil {
+	// 	panic(errr)
+	// }
+	//res := ""
+
 	for i := 0; i < len(arr); i++ {
 		if i == len(arr)-1 {
 			i = 0
 		}
+
 		fmt.Print(arr[i])
-		CallClear()
+
+		// for i, r := range arr[i] {
+		// 	res = res + string(r)
+		// 	if i > 0 && (i+1)%130 == 0 {
+		// 		fmt.Printf(res)
+		// 		res = ""
+
+		// 	}
+
+		// }
+		time.Sleep(150 * time.Millisecond)
+		//time.Sleep(100 * time.Millisecond)
+		//CallClear()
+
+		// err = f.Truncate(0)
+		// _, err = f.Seek(0, 0)
+		// _, err2 := f.WriteString(arr[i] + "/n")
+		// time.Sleep(150 * time.Millisecond)
+		// if err2 != nil {
+		// 	panic(err2)
+		// }
 	}
 }
