@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"image/gif"
 	_ "image/jpeg"
@@ -40,8 +41,10 @@ func CallClear() {
 
 func main() {
 	convertOptions := convert.DefaultOptions
-	convertOptions.FixedWidth = 230
-	convertOptions.FixedHeight = 100
+	convertOptions.FixedWidth = 130
+	convertOptions.FixedHeight = 40
+	convertOptions.Colored = false
+
 	//convertOptions.FitScreen = true
 	//convertOptions.StretchedScreen = true
 	//convertOptions.Ratio = 4.3
@@ -53,16 +56,32 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
 	g, err := gif.DecodeAll(inputFile)
 	if err != nil {
 		panic(err)
 	}
+
 	CallClear()
+
+	var arr []string
 	for i := 0; i < len(g.Image); i++ {
-		fmt.Print(converter.Image2ASCIIString(g.Image[i], &convertOptions))
-		CallClear()
+		arr = append(arr, converter.Image2ASCIIString(g.Image[i], &convertOptions))
+	}
+	var s string
+	r := bufio.NewReader(os.Stdin)
+	for {
+		fmt.Fprint(os.Stderr, "-"+" ")
+		s, _ = r.ReadString('\n')
+		if s != "" {
+			break
+		}
 	}
 
-	//fmt.Print("bruh")
+	for i := 0; i < len(arr); i++ {
+		if i == len(arr)-1 {
+			i = 0
+		}
+		fmt.Print(arr[i])
+		CallClear()
+	}
 }
